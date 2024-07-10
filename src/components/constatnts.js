@@ -1,0 +1,1 @@
+export const productApi = "http://localhost:8000/api/v1/products/allProducts?filter="
