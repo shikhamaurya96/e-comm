@@ -6,40 +6,18 @@ import {
     Typography,
     Spinner
     } from "@material-tailwind/react";
-const Account = () => {
-    const[image,setImage] = useState("./images/profile.webp")
-    const[name,setName] = useState("")
-    const[email,setEmail] = useState("")
-    const[mobile,setMobile] = useState("")
-    const[address,setAddress] = useState("")
 
+import useAccount from '../utils/useAccount';
+const Account = () => {
+  const [image,setImage] = useState("./images/profile.webp")
     const token = localStorage.getItem("userToken");
-    console.log(token)
+  console.log(token)
+  const{name,email,mobile,address,isLoading,fetchAccountData} = useAccount();
 
     useEffect(()=>{
-      userData()
+      fetchAccountData();
     },[])
 
-    async function userData(){
-      try {
-        const response = await fetch("http://localhost:8000/api/v1/user/account", {
-        method:"get",
-        headers:{
-          "content-type":"application/json",
-          "authorization":"Bearer "+token
-        }
-      })
-      const userData = await response.json();
-      console.log("userData",userData)
-      setName(userData.username)
-      setEmail(userData.email)
-    setMobile(userData.mobile)
-   setAddress(userData.address)
-      } catch (error) {
-        console.log("error",error)
-      }
-    }
-    
     const handleFile = async(e)=>{
       //console.log(e.target.files[0])
       const file = e.target.files[0]
@@ -64,7 +42,7 @@ const Account = () => {
     }
    
   return (
-    (name==="")?<div className='mt-12'><Spinner className=' m-auto'/></div>:<div className='mt-10 ml-6'>
+    (isLoading===true)?<div className='mt-12'><Spinner className=' m-auto'/></div>:<div className='mt-10 ml-6'>
         <Card className="w-full max-w-[48rem] flex-row h-max">
          <div>
             <img src={image} alt='profile' className='w-36 ml-8 mb-4'/>

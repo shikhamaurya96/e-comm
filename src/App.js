@@ -7,6 +7,7 @@ import Error from "./components/user/Error";
 import Home from "./components/product/Home";
 import ProtectedRoute from "./components/utils/ProtectedRoute";
 import Cart from "./components/cart/Cart"
+import Delivery from "./components/order/Delivery";
 
 function App() {
  
@@ -17,8 +18,10 @@ function App() {
       <Route path="/login" element={<Login/>}/>
     <Route path="/" element={<ProtectedRoute/>}>
       <Route path="/" element={<Home/>}/>
-      <Route path="/account" element={<Account/>}/>
+      <Route path="/profile" element={<Account/>}/>
       <Route path="/cart-items" element={<Cart/>}/>
+      <Route path="/myOrder" element={<Delivery/>}/>
+      
     </Route>
    
       <Route path="/error" element={<Error/>}/>

@@ -7,7 +7,15 @@ import {
     Typography,
     Button,
   } from "@material-tailwind/react";
+  import {useNavigate} from 'react-router-dom';
+
 const Order = ({myCartItem}) => {
+const navigate = useNavigate();
+function handlePlaceOrder(){
+ navigate("/myOrder")
+}
+
+
   return (
 
     <Card color="" variant="gradient" className="w-full  p-8">
@@ -62,6 +70,7 @@ const Order = ({myCartItem}) => {
           className="hover:scale-[1.02] focus:scale-[1.02] active:scale-100"
           ripple={false}
           fullWidth={true}
+          onClick={handlePlaceOrder}
         >
           place order
         </Button>
